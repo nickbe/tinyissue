@@ -342,4 +342,14 @@ class Project extends Eloquent {
 		return	$total;
 	}
 
+/**
+	* Returns all notes related to project
+	*
+	* @return mixed
+	*/
+	public function notes()
+	{
+		return $this->has_many('Project\Note', 'project_id');
+	}
+
 }

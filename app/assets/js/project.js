@@ -102,6 +102,62 @@ $(function() {
 		$('#' + id + ' .issue').show();
 	});
 
+    /* Notes Actions */
+    var notes = $('.notes');
+
+    notes.find('li .edit').live('click', function() {
+        var id = $(this).closest('.note').attr('id');
+        $('#' + id + ' .note-content').hide();
+        $('#' + id + ' .note-edit').show();
+        return false;
+    });
+
+    notes.find('li .cancel').live('click', function() {
+        var id = $(this).closest('.note').attr('id');
+
+        $('#' + id + ' .note-edit').hide();
+        $('#' + id + ' .note-content').show();
+    });
+
+    notes.find('li .save').live('click', function() {
+        var id = $(this).closest('.note').attr('id');
+        var url = current_url.replace('notes', 'edit_note');
+
+        $('#' + id + ' textarea').attr('disabled', 'disabled');
+
+        saving_toggle();
+
+        $.post(url, {
+            body: notes.find('#' + id + ' textarea').val(),
+            id: id,
+            csrf_token: $('input[name=csrf_token]').val()
+        }, function(data) {
+            $('#' + id + ' textarea').removeAttr('disabled');
+            $('#' + id + ' .note-edit').hide();
+            $('#' + id + ' .note-content').html(data).show();
+            saving_toggle();
+        });
+    });
+
+    notes.find('li .delete').live('click', function(e) {
+        e.preventDefault();
+
+        if (confirm('Are sure you want to delete this note?')) {
+
+            var saving = $('.global-saving span').html();
+            $('.global-saving span').html('Deleting');
+            $('.global-saving').show();
+
+            var id = $(this).closest('.note').attr('id');
+            var url = current_url.replace('notes', 'delete_note?delete=' + id);
+
+            $.get(url, function() {
+                $('#' + id).fadeOut();
+                $('.global-saving').hide();
+                $('.global-saving span').html(saving);
+            });
+        }
+    });
 });
 
 /* Autocomplete for sidebar adding user */

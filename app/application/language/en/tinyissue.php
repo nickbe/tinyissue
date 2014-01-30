@@ -131,4 +131,11 @@ return array(
 	'was_reassigned_to' => 'was reassigned to',
 	'dashboard_description' => 'An overview of all the activity involving your active projects.',
 	'change_project' => 'Change Project',
+	'note' => 'Note',
+	'notes' => 'Notes',
+	'no_notes' => 'This project does not have any notes!',
+	'add_note' => 'Add Note',
+	'you_put_no_note' => 'You did not put in a note!',
+	'your_note_added' => 'Your note has been added!',
+	'noted' => 'Noted',
 );

@@ -853,3 +853,39 @@ p{
 .table th{
 	font-weight: bold;
 }
+/* notes */
+.new-note {
+    padding: 0px 1%;
+}
+.new-note textarea {
+    width: 99%;
+    height: 90px;
+    padding: 0.5%;
+}
+.notes li .note-edit{
+    display: none;
+    padding: 8px 10px;
+    clear: both;
+}
+.notes li .note-edit .right{
+    padding: 15px 0px 5px 0px;
+    text-align: right;
+}
+.notes li .note-edit textarea {
+    width: 99%; height: 90px;
+}
+.blue-box .notes li .data {
+    margin-left:0px;
+}
+.blue-box .notes li .edit, .blue-box .notes li .delete {
+    min-height: 14px;
+    float: right;
+    background: url('../images/layout/icon-edit.png') 0 1px no-repeat;
+    padding-left: 21px;
+    color: #949393;
+    margin: 1px 8px 0 0;
+    display: block;
+}
+.blue-box .notes li .delete {
+    background: url('../images/layout/icon-delete.png') 0 1px no-repeat;
+}
