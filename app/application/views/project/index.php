@@ -25,6 +25,11 @@
 			<?php echo $assigned_count == 1 ? '1 '.__('tinyissue.issue_assigned_to_you') : $assigned_count . ' '.__('tinyissue.issues_assigned_to_you'); ?>
 			</a>
 		</li>
+		<li <?php echo $active == 'notes' ? 'class="active"' : ''; ?>>
+			<a href="<?php echo Project::current()->to('notes'); ?>">
+				<?php echo $notes_count == 1 ? '1 '.__('tinyissue.note') : $notes_count . ' '.__('tinyissue.notes'); ?>
+			</a>
+		</li>
 	</ul>
 
 	<div class="inside-tabs">

@@ -322,4 +322,14 @@ class Project extends Eloquent {
 		User\Activity::where('parent_id', '=', $id)->delete();
 	}
 
+	/**
+	* Returns all notes related to project
+	*
+	* @return mixed
+	*/
+	public function notes()
+	{
+		return $this->has_many('Project\Note', 'project_id');
+	}
+
 }
