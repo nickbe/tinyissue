@@ -93,7 +93,7 @@ class Project extends Eloquent {
 	*/
 	public function activity($activity_limit)
 	{
-		$users = $issues = $comments = $activity_type = array();
+		$users = $issues = $comments = $notes = $activity_type = array();
 
 		/* Load the activity types */
 		foreach(Activity::all() as $row)
@@ -127,6 +127,11 @@ class Project extends Eloquent {
 			if(!isset($comments[$activity->action_id]))
 			{
 				$comments[$activity->action_id] = Project\Issue\Comment::find($activity->action_id);
+			}
+
+			if(!isset($notes[$activity->item_id]))
+			{
+				$notes[$activity->item_id] = Project\Note::find($activity->item_id);
 			}
 
 			if($activity->type_id == 5)
@@ -170,6 +175,16 @@ class Project extends Eloquent {
 						'project' => $this,
 						'user' => $users[$row->user_id],
 						'assigned' => $users[$row->action_id],
+						'activity' => $row
+					));
+
+					break;
+
+				case 6:
+					$return[] = View::make('activity/' . $activity_type[$row->type_id]->activity, array(
+						'note' => $notes[$row->item_id],
+						'project' => $this,
+						'user' => $users[$row->user_id],
 						'activity' => $row
 					));
 
@@ -320,6 +335,16 @@ class Project extends Eloquent {
 		Project\Issue\Comment::where('project_id', '=', $id)->delete();
 		Project\User::where('project_id', '=', $id)->delete();
 		User\Activity::where('parent_id', '=', $id)->delete();
+	}
+
+	/**
+	* Returns all notes related to project
+	*
+	* @return mixed
+	*/
+	public function notes()
+	{
+		return $this->has_many('Project\Note', 'project_id');
 	}
 
 }

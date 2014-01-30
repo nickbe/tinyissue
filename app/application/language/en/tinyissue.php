@@ -116,9 +116,17 @@ return array(
 	'label_reopened' => 'Reopened',
 	'label_created' => 'Created',
 	'label_reassigned' => 'Reassigned',
+	'label_note' => 'Note',
 	'was_closed_by' => 'was closed by',
 	'was_reopened_by' => 'was reopened by',
 	'was_created_by' => 'was created by',
 	'was_reassigned_to' => 'was reassigned to',
-	'dashboard_description' => 'An overview of all the activity involving your active projects.'
+	'dashboard_description' => 'An overview of all the activity involving your active projects.',
+	'note' => 'Note',
+	'notes' => 'Notes',
+	'no_notes' => 'This project does not have any notes!',
+	'add_note' => 'Add Note',
+	'you_put_no_note' => 'You did not put in a note!',
+	'your_note_added' => 'Your note has been added!',
+	'noted' => 'Noted',
 );

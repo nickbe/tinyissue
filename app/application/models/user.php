@@ -78,7 +78,7 @@ class User extends Eloquent {
 	*/
 	public function dashboard($activity_limit = 5)
 	{
-		$dashboard =  $users = $issues = $projects = $comments = $activity_type = array();
+		$dashboard =  $users = $issues = $projects = $comments = $notes = $activity_type = array();
 
 		/* Load the activity types */
 		foreach(Activity::all() as $row)
@@ -138,6 +138,25 @@ class User extends Eloquent {
 
 						break;
 
+					case 6:
+
+						if(!isset($notes[$activity->item_id]))
+						{
+							$notes[$activity->item_id] = Project\Note::find($activity->item_id);
+						}
+
+						if(!isset($users[$activity->user_id]))
+						{
+							$users[$activity->user_id] = static::find($activity->user_id);
+						}
+
+						if(!isset($users[$activity->action_id]))
+						{
+							$users[$activity->action_id] = static::find($activity->action_id);
+						}
+
+						break;
+
 					default:
 
 						if(!isset($issues[$activity->item_id]))
@@ -188,6 +207,17 @@ class User extends Eloquent {
 						'project' => $projects[$project_id],
 						'user' => $users[$row->user_id],
 						'assigned' => $users[$row->action_id],
+						'activity' => $row
+					));
+
+					break;
+
+				case 6:
+
+					$return[$project_id]['activity'][] = View::make('activity/' . $activity_type[$row->type_id]->activity, array(
+						'note' => $notes[$row->item_id],
+						'project' => $projects[$project_id],
+						'user' => $users[$row->user_id],
 						'activity' => $row
 					));
 
