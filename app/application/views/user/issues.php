@@ -28,6 +28,10 @@
 							- <?php echo __('tinyissue.updated_by'); ?> <strong><?php echo $row->updated->firstname . ' ' . $row->updated->lastname; ?></strong>
 							<?php echo Time::age(strtotime($row->updated_at)); ?>
 							<?php endif; ?>
+
+							<?php if ($row->time_quote > 0): ?>
+							- <?php echo __('tinyissue.time_quote'); ?> <strong><?php echo Time::time_duration($row->time_quote); ?></strong>
+							<?php endif; ?>
 						</div>
 					</div>
 				</li>

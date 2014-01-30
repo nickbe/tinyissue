@@ -29,6 +29,12 @@
 					<?php echo Form::select('assigned_to', array(0 => '') + Project\User::dropdown($project->users()->get()), Input::old('asigned_to', $issue->assigned_to)); ?>
 				</td>
 			</tr>
+			<tr>
+				<th><?php echo __('tinyissue.time_quote'); ?></th>
+				<td>
+					<?php echo FormElement::time_input($issue->time_quote); ?>
+				</td>
+			</tr>
 			<?php endif; ?>
 			<tr>
 				<th></th>

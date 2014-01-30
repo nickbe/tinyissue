@@ -184,6 +184,31 @@ input[type=submit]:focus{
 	color: white;
 }
 
+.time-element {
+    overflow: hidden;
+}
+.time-element li {
+    float: left;
+    display: inline;
+    margin-right: 8px;
+}
+.time-element li input {
+    border-radius: 5px 0px 0px 5px;
+    width: 80px;
+}
+.time-element li span {
+    border: 1px solid #d4d4d4;
+    border-radius: 0px 5px 5px 0px;
+    padding: 7px;
+    font: normal 13px Helvetica, "Lucida Grande", Arial, sans-serif;
+    color: #424242;
+    box-shadow: 0 -1px 1px #b6b6b6;
+    background: #ededed;
+    margin-left: -5px;
+    font-weight: bold;
+    border-left: 0px none;
+}
+
 p{
 	margin-bottom: 10px;
 	line-height: 17px;
@@ -559,6 +584,14 @@ p{
 	border-bottom: 1px solid #dddddd
 }
 /* Issues */
+.issue-quote {
+    text-align: right;
+    padding: 0px 3px 8px 0px;
+}
+.issue-quote span, .issue-quote strong {
+    border-bottom: 2px solid #d4d4d4;
+    padding: 1px 3px;
+}
 .issue-discussion > li{
 	border: 2px solid #dcdcdc;
 	border-radius: 6px;

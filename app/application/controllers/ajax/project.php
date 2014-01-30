@@ -15,7 +15,8 @@ class Ajax_Project_Controller extends Base_Controller {
 			'remove_user',
 		));
 		$this->filter('before', 'permission:issue-modify')->only(array(
-			'issue_assign'
+			'issue_assign',
+			'time_quote'
 		));
 
 	}

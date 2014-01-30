@@ -39,6 +39,14 @@
 					<ul id="uploaded-attachments"></ul>
 				</td>
 			</tr>
+			<?php if(Auth::user()->permission('issue-modify')): ?>
+			<tr>
+				<th><?php echo __('tinyissue.time_quote'); ?></th>
+				<td>
+					<?php echo FormElement::time_input(); ?>
+				</td>
+			</tr>
+			<?php endif; ?>
 			<tr>
 				<th></th>
 				<td><input type="submit" value="<?php echo __('tinyissue.create_issue'); ?>" class="button primary" /></td>
