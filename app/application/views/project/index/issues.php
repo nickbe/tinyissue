@@ -4,6 +4,9 @@
 		<?php if(!$issues): ?>
 		<p><?php echo __('tinyissue.no_issues'); ?></p>
 		<?php else: ?>
+		<div class="issue-quote">
+			<strong><?php echo __('tinyissue.total_quote'); ?>:</strong><span><?php echo Time::time_duration(Project::current()->total_quote($issues)); ?></span>
+		</div>
 		<ul class="issues">
 			<?php foreach($issues as $row):  ?>
 			<li>
@@ -19,6 +22,10 @@
 						<?php if(!is_null($row->updated_by)): ?>
 						- <?php __('tinyissue.updated_by'); ?> <strong><?php echo $row->updated->firstname . ' ' . $row->updated->lastname; ?></strong>
 						<?php echo Time::age(strtotime($row->updated_at)); ?>
+						<?php endif; ?>
+
+						<?php if ($row->time_quote > 0): ?>
+						- <?php echo __('tinyissue.time_quote'); ?> <strong><?php echo Time::time_duration($row->time_quote); ?></strong>
 						<?php endif; ?>
 					</div>
 				</div>

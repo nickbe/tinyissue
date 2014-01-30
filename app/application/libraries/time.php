@@ -29,4 +29,33 @@ class Time {
 
 		return $difference . ' ' . $periods[$j] . ' ago';
 	}
+
+	 /**
+			* Convert seconds into time duration format
+			*
+			* @param int $value
+			* @return string
+			*/
+		public	static	function	time_duration($value)	{
+			$hours	=	floor($value	/	3600);
+			$minutes	=	($value	/	60)	%	60;
+			$seconds	=	$value	%	60;
+
+			$output	=	'';
+			$seperatorChar	=	', ';
+			$seperator	=	'';
+			if	($hours	>	0)	{
+				$output	.=	$hours	.	' '	.	__('tinyissue.short_hours');
+				$seperator	=	$seperatorChar;
+			}
+			if	($minutes	>	0)	{
+				$output	.=	$seperator	.	$minutes	.	' '	.	__('tinyissue.short_minutes');
+				$seperator	=	$seperatorChar;
+			}
+			if	($seconds	>	0)	{
+				$output	.=	$seperator	.	$seconds	.	' '	.	__('tinyissue.short_seconds');
+			}
+			return	$output;
+		}
+
 }

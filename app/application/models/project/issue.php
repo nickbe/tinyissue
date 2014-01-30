@@ -10,6 +10,21 @@ class Issue extends \Eloquent {
 	******************************************************************/
 
 	/**
+		* Convert time quote from an array into seconds
+		*
+		* @param array $value
+		*/
+	public	function	set_time_quote($value)	{
+		$seconds	=	$value;
+		if	(is_array($value))	{
+			$seconds	=	isset($value['s'])	?	$value['s']	:	0;
+			$seconds	+=	isset($value['m'])	?	($value['m']	*	60)	:	0;
+			$seconds	+=	isset($value['h'])	?	($value['h']	*	60	*	60)	:	0;
+		}
+		$this->attributes['time_quote']	=	(int)	$seconds;
+	}
+
+	/**
 	* @return User
 	*/
 	public function user()
@@ -263,7 +278,8 @@ class Issue extends \Eloquent {
 		$fill = array(
 			'title' => $input['title'],
 			'body' => $input['body'],
-			'assigned_to' => $input['assigned_to']
+			'assigned_to' => $input['assigned_to'],
+			'time_quote' => $input['time_quote']
 		);
 
 		/* Add to activity log for assignment if changed */
@@ -348,6 +364,7 @@ class Issue extends \Eloquent {
 		if(\Auth::user()->permission('issue-modify'))
 		{
 			$fill['assigned_to'] = $input['assigned_to'];
+			$fill['time_quote'] = $input['time_quote'];
 		}
 
 		$issue = new static;

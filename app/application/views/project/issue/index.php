@@ -11,6 +11,9 @@
 </h3>
 
 <div class="pad">
+	<?php if ($issue->time_quote > 0): ?>
+	<div class="issue-quote"><strong><?php echo __('tinyissue.time_quote'); ?>:</strong><span><?php echo Time::time_duration($issue->time_quote); ?></span></div>
+	<?php endif ?>
 
 	<ul class="issue-discussion">
 		<li>

@@ -322,4 +322,22 @@ class Project extends Eloquent {
 		User\Activity::where('parent_id', '=', $id)->delete();
 	}
 
+	/**
+		* Get total issues total quote time
+		*
+		* @return int
+		*/
+	public	function	total_quote($issues	=	null)	{
+		$total	=	0;
+		if	(null	===	$issues)	{
+			$issues	=	$this->issues()->get();
+		}
+
+		foreach	($issues	as	$issue)	{
+			$total	+=	$issue->time_quote;
+		}
+
+		return	$total;
+	}
+
 }
