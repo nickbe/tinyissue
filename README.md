@@ -1,5 +1,14 @@
 ![](http://tinyissue.com/assets/images/giant-preview.png)
 
+> 
+> This branch contains all of the customisations I have made to 'Tiny Issue', which includes,
+> - The ability to move an issue with its comments to another project.
+> - Set default assignee for a project issues.
+> - A content text filter to convert issues numbers in comments or issue content into a link to that issue.
+> - The ability to attach quotes (hours, minutes, seconds) to project issues.
+> - Add, edit, delete notes in  projects.
+> 
+
 # Installing Tiny Issue v1.3.1
 
 - Create a MySQL Database
