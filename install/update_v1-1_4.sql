@@ -11,3 +11,6 @@ CREATE TABLE IF NOT EXISTS `projects_notes` (
   `updated_at` datetime default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+INSERT IGNORE INTO `activity` (`id`, `description`, `activity`)
+VALUES (6,'Note on a project','note');

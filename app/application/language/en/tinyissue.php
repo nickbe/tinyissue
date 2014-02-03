@@ -125,6 +125,7 @@ return array(
 	'label_reopened' => 'Reopened',
 	'label_created' => 'Created',
 	'label_reassigned' => 'Reassigned',
+	'label_note' => 'Note',
 	'was_closed_by' => 'was closed by',
 	'was_reopened_by' => 'was reopened by',
 	'was_created_by' => 'was created by',
