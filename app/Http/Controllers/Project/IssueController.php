@@ -36,11 +36,10 @@ class IssueController extends Controller
      * @param Project     $project
      * @param Issue       $issue
      * @param CommentForm $form
-     * @param Request     $request
      *
      * @return \Illuminate\View\View
      */
-    public function getIndex(Project $project, Issue $issue, CommentForm $form, Request $request)
+    public function getIndex(Project $project, Issue $issue, CommentForm $form)
     {
         $issue->attachments->each(function (Attachment $attachment) use ($issue) {
             $attachment->setRelation('issue', $issue);
