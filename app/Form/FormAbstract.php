@@ -34,7 +34,7 @@ abstract class FormAbstract implements FormInterface
      *
      * @param Model $model
      *
-     * @return void|FormInterface
+     * @return FormAbstract
      */
     public function editingModel(Model $model)
     {
