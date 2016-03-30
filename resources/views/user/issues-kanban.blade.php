@@ -29,46 +29,48 @@ active
 @stop
 
 @section('content')
-    {!! Html::startBox('kanban-projects-list blue-box gray-box toolbar') !!}
-    @lang('tinyissue.select_project')
-    <div class="dropdown">
+    <nav id="kanban-projects-nav" class="kanban-nav">
         <ul>
+            <li class="kanban-pill-tag">@lang('tinyissue.select_project'):</li>
             @foreach ($projects as $aProject)
-                <li>
+                <li @if($project->id == $aProject->id) class="current" @endif>
                     <a href="{!! url('user/issues/kanban/' . $aProject->id) !!}" data-project-id="{{ $aProject->id }}">
                         {{ $aProject->name }}
                     </a>
                 </li>
             @endforeach
         </ul>
-    </div>
-    <strong class="current">{{ $project->name }}</strong>
-    {!! Html::endBox() !!}
+    </nav>
 
     <div class="kanban-wrap">
         <ul class="kanban">
             @foreach($columns as $column)
                 <li class="column column-{{ $column->id }}">
                     <div class="column-wrap">
-                        <h2 class="heading">
-                            {{ $column->name }}
-                        </h2>
-                        <div class="content" data-column="{{ $column->id }}">
+
+                        <div class="arrowcaption" style="color:{{ $column->bgcolor or 'gray' }};">{{ $column->name }}</div>
+                        <div class="arrow"></div>
+
+                        <div class="content" data-column="{{ $column->id }}" style="border-color:{{ $column->bgcolor or '#3498db' }};">
                             @if ($issues->get($column->name))
                                 @foreach($issues->get($column->name) as $issue)
                                     <div class="issue issue-{{ $issue->id }}"
-                                         data-url="project/issue/{{ $issue->id }}/change_tag"
+                                         data-url="project/issue/{{ $issue->id }}/change_kanban_tag"
                                          data-column="{{ $column->id }}">
                                         <div class="summary">
                                             <a href="{{ $issue->to() }}" class="id">#{{ $issue->id }}</a>
                                             <span>{{ $issue->title }}</span>
                                         </div>
 
+                                        <div class="kanban-user">
+                                            <img class="kanban-user-image" src="{{ $issue->user->image }}">
+                                        </div>
+
                                         <div class="info">
-                                            @lang('tinyissue.created_by')
-                                            <strong>{{ $issue->user->fullname }}</strong>
+                                            <a class="info-user" href="{{ $issue->to() }}">{{ $issue->user->fullname }}</a>
                                             {{ Html::age($issue->created_at) }}
                                         </div>
+
                                     </div>
                                 @endforeach
                             @endif

@@ -16,11 +16,11 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 
 /**
- * Authenticate is a Middleware class to for checking if current user is logged in.
+ * Locale is a Middleware class to set the locale for the current logged in user.
  *
  * @author Mohamed Alsharaf <mohamed.alsharaf@gmail.com>
  */
-class Authenticate
+class Locale
 {
     /**
      * The Guard implementation.
@@ -49,15 +49,9 @@ class Authenticate
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($this->auth->guest()) {
-            if ($request->ajax()) {
-                abort(401);
-            }
-
-            return redirect()->guest('/');
+        if (!$this->auth->guest()) {
+            app()->setLocale($this->auth->user()->language);
         }
-
-        app()->setLocale($this->auth->user()->language);
 
         return $next($request);
     }

@@ -117,7 +117,7 @@ return [
         'Illuminate\Redis\RedisServiceProvider',
         'Illuminate\Auth\Passwords\PasswordResetServiceProvider',
         'Illuminate\Session\SessionServiceProvider',
-        'Illuminate\Translation\TranslationServiceProvider',
+        'Overtrue\LaravelLang\TranslationServiceProvider',
         'Illuminate\Validation\ValidationServiceProvider',
         'Illuminate\View\ViewServiceProvider',
         /*
@@ -136,6 +136,7 @@ return [
         'Tinyissue\Providers\BladeServiceProvider',
         'Tinyissue\Providers\ComposerServiceProvider',
         'Maatwebsite\Excel\ExcelServiceProvider',
+        'Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider',
     ],
     /*
       |--------------------------------------------------------------------------
