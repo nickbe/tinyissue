@@ -198,4 +198,6 @@ return [
     'columns_help'                      => 'Open & Close tags are automatically added. The following status tags available => :status',
     'select_project'                    => 'Choose project',
     'myprofile'                         => 'My profile',
+	'resolution'                        => 'Resolution',
+    'type'                              => 'Type',
 ];
