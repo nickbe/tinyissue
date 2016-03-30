@@ -27,4 +27,5 @@ tests/_output/*
 /node_modules/
 storage/exports/*
 .config
+/public/.config
 nosql-server.exe
