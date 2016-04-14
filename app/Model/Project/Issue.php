@@ -122,4 +122,19 @@ class Issue extends BaseModel
         }
         $this->attributes['time_quote'] = (int) $seconds;
     }
+    /**
+     * Returns the color of tag status
+     *
+     * @return string
+     */
+    public function getTypeColorAttribute()
+    {
+        $tag = $this->tags->filter(function(Model\Tag $tag) {
+            return $tag->parent->name === 'type';
+        })->first();
+        if ($tag) {
+            return $tag->bgcolor;
+        }
+        return null;
+    }
 }

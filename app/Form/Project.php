@@ -98,7 +98,7 @@ class Project extends FormAbstract
             })->map(function (TagModel $tag) {
                 return [
                     'value'   => $tag->id,
-                    'label'   => ($tag->fullname),
+                    'label'   => $tag->fullname,
                     'bgcolor' => $tag->bgcolor,
                 ];
             })->toJson();

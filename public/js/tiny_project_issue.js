@@ -1195,6 +1195,9 @@ if("undefined"==typeof jQuery)throw new Error("Bootstrap's JavaScript requires j
 $(function () {
     'use strict';
 
+    // For mobile fullscreen
+    // $.stayInWebApp();
+
     var globalNotice = $('.global-notice');
     if (globalNotice.html().length > 0) {
         globalNotice.slideDown();
