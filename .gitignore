@@ -29,3 +29,10 @@ storage/exports/*
 .config
 /public/.config
 nosql-server.exe
+make_dist.bat
+/.dev/
+/.dev/*
+*.clpprj
+search.cmd
+*.cmd
+public/iframe.php
