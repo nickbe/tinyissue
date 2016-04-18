@@ -12,6 +12,7 @@
 namespace Tinyissue\Form;
 
 use Tinyissue\Model;
+use Tinyissue\Model\Role;
 
 /**
  * Tag is a class to defines fields & rules for add/edit tag form.
@@ -57,6 +58,11 @@ class Tag extends FormAbstract
                 'type'    => 'select',
                 'label'   => 'group',
                 'options' => [0 => ''] + $tag->getGroups()->lists('name', 'id')->all(),
+            ],
+            'role_id' => [
+                'type'    => 'select',
+                'label'   => 'min_role',
+                'options' => Role::dropdown(),
             ],
             'bgcolor' => [
                 'type'  => 'color',

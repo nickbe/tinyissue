@@ -1,3 +1,8 @@
+$( document ).on( "click","a", function( e ){
+	e.preventDefault();
+	document.location.href = $(this).attr('href');
+});
+
 $(function () {
     'use strict';
 

@@ -67,7 +67,7 @@ class Tag extends Model
      *
      * @var array
      */
-    public $fillable = ['parent_id', 'name', 'bgcolor', 'group'];
+    public $fillable = ['parent_id', 'name', 'bgcolor', 'group','role_id'];
 
     /**
      * Name of database table.

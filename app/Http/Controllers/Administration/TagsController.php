@@ -122,6 +122,7 @@ class TagsController extends Controller
                     'value'   => $tag->id,
                     'label'   => $tag->fullname,
                     'bgcolor' => $tag->bgcolor,
+					'role_id' => $tag->role_id,
                 ];
             })->toArray();
         }
