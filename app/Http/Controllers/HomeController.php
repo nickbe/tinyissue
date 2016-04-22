@@ -11,6 +11,8 @@
 
 namespace Tinyissue\Http\Controllers;
 
+use Auth as Auth;
+use Lang;
 use Tinyissue\Form\Login as LoginForm;
 use Tinyissue\Http\Requests\FormRequest;
 use Tinyissue\Model\Project;
@@ -91,12 +93,27 @@ class HomeController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        if ($this->auth->attempt($credentials, $request->has('remember'))) {
+        if ($this->auth->attempt($credentials, $request->has('remember'))
+            && $this->auth->user()->isActive()
+        ) {
             return redirect()->to('/dashboard');
         }
 
+        // Get error message
+        $errorMessage = 'password_incorrect';
+        if (!$this->auth->guest()) {
+            if ($this->auth->user()->isInactive()) {
+                $errorMessage = 'user_is_not_active';
+            } elseif ($this->auth->user()->isBlocked()) {
+                $errorMessage = 'user_is_blocked';
+            }
+
+            // Logged out
+            $this->auth->logout();
+        }
+
         return redirect('/')
-                        ->withInput($request->only('email'))
-                        ->with('notice-error', trans('tinyissue.password_incorrect'));
+            ->withInput($request->only('email'))
+            ->with('notice-error', trans('tinyissue.' . $errorMessage));
     }
 }

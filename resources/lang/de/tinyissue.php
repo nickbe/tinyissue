@@ -198,4 +198,11 @@ return [
     'columns_help'                      => 'Offen & Geschlossen tags werden automatisch hinzugefügt. Folgende status tags sind verfügbar => :status',
     'select_project'                    => 'Projekt auswählen',
     'myprofile'                         => 'Mein Profil',
+    'resolution'                        => 'Abschluss',
+    'type'                              => 'Ticketart',
+    'blocked'                           => 'Gesperrt',
+    'restricted'                        => 'Eingeschränkt',
+    'inactive'                          => 'Deaktiviert',
+    'user_is_blocked'                   => 'Dieser Benutzer ist derzeit gesperrt.',
+    'user_is_not_active'                => 'Dieser Benutzer wurde vorübergehend deaktiviert.',
 ];

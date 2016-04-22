@@ -102,5 +102,7 @@ return [
         'only_complete_if_changing_password' => 'Only complete if changing password',
         'remember_me'                        => 'Remember me?',
         'kanban_board'                       => 'Kanban board',
+        'internal_status'                    => 'Internal status',
+        'extended_user_settings'             => 'Extended user settings',
     ],
 ];
