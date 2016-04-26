@@ -2,24 +2,19 @@ $(function () {
     'use strict';
 
     // Radio button selection
-    $('.radio-btn .btn').on('click', function () {
-        $(this).siblings().each(function() {
-           var btn = $(this), color = btn.find('input').data('color');
-            btn.removeClass('active').css({
-                'color': color,
-                'border-color': color,
-                'background': 'white'
-            });
+    CheckableButtons().init();
+
+    // Manage issue comments & activity tabs
+    $('.activities .nav-tabs a').addClass('has-event').on('click', function(e) {
+        e.preventDefault();
+        var link = $(this).parent(), siblings = link.siblings();
+        Ajax.get($(this).attr('href'), function (data) {
+            GlobalSaving.toggle();
+            $('.activities .discussion.comments').html(data.activity);
+            siblings.removeClass('active');
+            link.addClass('active');
         });
-        if ($(this).find('input').is(':checked')) {
-            var color = $(this).find('input').data('color');
-            $(this).addClass('active').css({
-                'color': 'white',
-                'border-color': color,
-                'background': color
-            });
-        }
-    });
+    }).first().click();
 
     Discussion().init({
         name: 'comment',
@@ -32,7 +27,7 @@ $(function () {
     });
 
     // Left column assign users
-    $('.delete-from-project').on('click', function (e) {
+    $('.delete-from-project').addClass('has-event').on('click', function (e) {
         e.preventDefault();
         var user_id = $(this).data('user-id');
         ConfirmDialog.show($(this), function (el) {
@@ -79,7 +74,7 @@ $(function () {
     });
 
     // Issue assign user
-    $('.assign-user').on('click', function (e) {
+    $('.assign-user').addClass('has-event').on('click', function (e) {
         e.preventDefault();
         var issue = $(this).data('issue-id');
         var user = $(this).data('assign-id');
@@ -97,7 +92,7 @@ $(function () {
     });
 
     // Change issue project
-    $('.change-project').on('click', function (e) {
+    $('.change-project').addClass('has-event').on('click', function (e) {
         e.preventDefault();
         var issue = $(this).data('issue-id');
         var project = $(this).data('project-id');

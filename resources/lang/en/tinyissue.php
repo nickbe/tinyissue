@@ -195,7 +195,7 @@ return [
     'enable'                            => 'Enable',
     'disable'                           => 'Disable',
     'manage_settings_description'       => 'Update the application global settings.',
-    'columns_help'                      => 'Open & Close tags are automatically added. The following status tags available => :status',
+    'columns_help'                      => 'Open & Close tags are automatically added.',
     'select_project'                    => 'Choose project',
     'myprofile'                         => 'My profile',
     'none'                              => 'None',
@@ -206,4 +206,5 @@ return [
     'inactive'                          => 'Inactive',
     'user_is_blocked'                   => 'User is currently blocked from login',
     'user_is_not_active'                => 'User account has been temporarily deactivated',
+    'comments'                          => 'Comments',
 ];
