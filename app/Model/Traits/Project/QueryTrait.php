@@ -176,9 +176,24 @@ trait QueryTrait
      *
      * @return mixed
      */
-    public function getKanbanTags()
+    public function getKanbanTags($prefilter=false)
     {
         $tags = $this->kanbanTags()->get();
+
+		/**
+		 * Filter open/closed tags and all tags to which the user has
+		 * no view access due to the tags VIEW_LIMIT_ROLE - nickbe
+		**/
+
+		if ($prefilter) {
+			foreach ($tags as $position => $tag) {
+				if ($tag->name == Tag::STATUS_OPEN || $tag->name == Tag::STATUS_CLOSED
+												   || \Auth::user()->role_id < $tag->role_limit) {
+						unset($tags[$position]);
+					}
+			}
+		}
+
         if (!$tags->count()) {
             $tags       = (new Tag())->getOpenAndCloseTags();
             $kanbanTags = $this->kanbanTags();

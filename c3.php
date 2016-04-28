@@ -19,7 +19,7 @@ if (isset($_COOKIE['CODECEPTION_CODECOVERAGE'])) {
         $cookie = json_decode($cookie, true);
     }
 
-    if ($cookie) {
+    if ($cookie) {    
         foreach ($cookie as $key => $value) {
             $_SERVER["HTTP_X_CODECEPTION_".strtoupper($key)] = $value;
         }
@@ -245,7 +245,7 @@ if ($requested_c3_report) {
 } else {
     $codeCoverage = __c3_factory($current_report);
     $codeCoverage->start(C3_CODECOVERAGE_TESTNAME);
-    if (!array_key_exists('HTTP_X_CODECEPTION_CODECOVERAGE_DEBUG', $_SERVER)) {
+    if (!array_key_exists('HTTP_X_CODECEPTION_CODECOVERAGE_DEBUG', $_SERVER)) { 
         register_shutdown_function(
             function () use ($codeCoverage, $current_report) {
 
