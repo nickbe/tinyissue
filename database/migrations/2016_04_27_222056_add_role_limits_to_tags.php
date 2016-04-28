@@ -14,7 +14,7 @@ class AddRoleLimitsToTags extends Migration
     {
         Schema::table('tags', function (Blueprint $table) {
             $table->bigInteger('role_limit')->nullable();
-			$table->bigInteger('role_msg')->nullable();
+            $table->bigInteger('role_msg')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddRoleLimitsToTags extends Migration
     public function down()
     {
         Schema::table('tags', function (Blueprint $table) {
-			$table->dropColumn('role_msg');
+            $table->dropColumn('role_msg');
             $table->dropColumn('role_limit');
         });
     }

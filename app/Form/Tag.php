@@ -63,12 +63,12 @@ class Tag extends FormAbstract
                 'type'  => 'color',
                 'label' => 'bgcolor',
             ],
-			 'role_limit'          => [
+             'role_limit'          => [
                 'type'    => 'select',
                 'label'   => 'Limit access-role',
                 'options' => Role::dropdown(),
             ],
-			 'role_msg'          => [
+             'role_msg'          => [
                 'type'    => 'select',
                 'label'   => 'Limit mail-role',
                 'options' => Role::dropdown(),

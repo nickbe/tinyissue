@@ -139,13 +139,6 @@ class Issue extends FormAbstract
         // Status tags
         $fields += $this->fieldStatusTags();
 
-		/*
-		$fields['You_have_currently_no_permission_to_change_the_status'] = [
-            'type' => 'label',
-        ];
-		*/
-
-
         // Assign users
         $fields += $this->fieldAssignedTo();
 
@@ -196,50 +189,50 @@ class Issue extends FormAbstract
     protected function fieldStatusTags()
     {
 
-		/**
-		 * Let the user only select from tags he may access
-		 * according to the tags VIEW_LIMIT_ROLE - nickbe
-		**/
+        /**
+         * Let the user only select from tags he may access
+         * according to the tags VIEW_LIMIT_ROLE - nickbe
+        **/
 
-		$current_tag = $this->getIssueTagId('status');
-		$tags = $this->project->getKanbanTags();
+        $current_tag = $this->getIssueTagId('status');
+        $tags = $this->project->getKanbanTags();
+        $single_tag = false;
+        
+        foreach ($tags as $position => $tag) {
+
+            /**
+             * Let's check if the user can access the current tag
+             * if not then it'll be the only tag he will see, thus
+             * not being able to change it.
+            **/
+
+            if ( $current_tag == $tag->id && \Auth::user()->role_id < $tag->role_limit ) {
+                $single_tag = true;
+                break;
+            }
+        }
 
 
-		$single_tag = false;
-		foreach ($tags as $position => $tag) {
+        /**
+         * Show tags as usual and according to role
+         * or simply show one single active (locked) tag
+        **/
 
-			/**
-			 * Let's check if the user can access the current tag
-			 * if not then this is the only tag he will see
-			**/
+        if ($single_tag) {
 
-			if ( $current_tag == $tag->id && \Auth::user()->role_id < $tag->role_limit ) {
-				$single_tag = true;
-				break;
-			}
-		}
+            foreach ($tags as $position => $tag) {
+                if ($current_tag !== $tag->id) {
+                    unset($tags[$position]);
+                }
+            }
 
+        } else {
 
-		/**
-		 * Show tags as usual and according to role
-		 * or simply show one single active (locked) tag
-		**/
-
-		if ($single_tag) {
-
-			foreach ($tags as $position => $tag) {
-				if ($current_tag !== $tag->id) {
-						unset($tags[$position]);
-					}
-			}
-
-		} else {
-
-			$tags = $tags->filter(function (Model\Tag $tag) {
-				return !(\Auth::user()->role_id < $tag->role_limit || $tag->name == Model\Tag::STATUS_OPEN || $tag->name == Model\Tag::STATUS_CLOSED);
-			});
-
-		}
+            $tags = $tags->filter(function (Model\Tag $tag) {
+                return !(\Auth::user()->role_id < $tag->role_limit || $tag->name == Model\Tag::STATUS_OPEN 
+                                                                   || $tag->name == Model\Tag::STATUS_CLOSED);
+            });
+        }
 
 
         $options = [];
@@ -268,42 +261,34 @@ class Issue extends FormAbstract
      */
     protected function fieldTypeTags()
     {
-        $tags    = $this->getTags('type');
+        $tags = $this->getTags('type');
+        $current_tag = $this->getIssueTagId('type');
+        $single_tag = false;
 
+        foreach ($tags as $position => $tag) {
 
-		$current_tag = $this->getIssueTagId('type');
-		$single_tag = false;
+            /**
+             * Let's check if the user can access the current tag
+             * if not then this is the only tag he will see
+            **/
+            if ( $current_tag == $tag->id && \Auth::user()->role_id < $tag->role_limit ) {
+                $single_tag = true;
+                break;
+            }
+        }
+    
+        if ($single_tag) {
 
-		foreach ($tags as $position => $tag) {
-
-			/**
-			 * Let's check if the user can access the current tag
-			 * if not then this is the only tag he will see
-			**/
-
-			if ( $current_tag == $tag->id && \Auth::user()->role_id < $tag->role_limit ) {
-				$single_tag = true;
-				break;
-			}
-		}
-
-		if ($single_tag) {
-
-			foreach ($tags as $position => $tag) {
-				if ($current_tag !== $tag->id) {
-						unset($tags[$position]);
-					}
-			}
-
-		} else {
-
-			$tags = $tags->filter(function (Model\Tag $tag) {
-				return !(\Auth::user()->role_id < $tag->role_limit );
-			});
-
-		}
-
-
+            foreach ($tags as $position => $tag) {
+                if ($current_tag !== $tag->id) {
+                    unset($tags[$position]);
+                }
+            }
+        } else {
+            $tags = $tags->filter(function (Model\Tag $tag) {
+                return !(\Auth::user()->role_id < $tag->role_limit);
+            });
+        }
 
         $options = [];
         foreach ($tags as $tag) {
@@ -332,55 +317,52 @@ class Issue extends FormAbstract
      */
     protected function fieldResolutionTags()
     {
-        $tags    = $this->getTags('resolution');
+        $tags = $this->getTags('resolution');
+        $current_tag = $this->getIssueTagId('resolution');
+        $single_tag = false;
 
+        foreach ($tags as $position => $tag) {
 
-		$current_tag = $this->getIssueTagId('resolution');
-		$single_tag = false;
+            /**
+             * Let's check if the user can access the current tag
+             * if not then this is the only tag he will see
+            **/
 
-		foreach ($tags as $position => $tag) {
+            if ( $current_tag == $tag->id && \Auth::user()->role_id < $tag->role_limit ) {
+                $single_tag = true;
+                break;
+            }
+        }
 
-			/**
-			 * Let's check if the user can access the current tag
-			 * if not then this is the only tag he will see
-			**/
+        /**
+         * Show tags as usual and according to role
+         * or simply show one single active (locked) tag
+        **/
 
-			if ( $current_tag == $tag->id && \Auth::user()->role_id < $tag->role_limit ) {
-				$single_tag = true;
-				break;
-			}
-		}
+        if ($single_tag) {
 
+            foreach ($tags as $position => $tag) {
+                if ($current_tag !== $tag->id) {
+                    unset($tags[$position]);
+                }
+            }
 
-		/**
-		 * Show tags as usual and according to role
-		 * or simply show one single active (locked) tag
-		**/
+        } else {
 
-		if ($single_tag) {
+            $tags = $tags->filter(function (Model\Tag $tag) {
+                return !(\Auth::user()->role_id < $tag->role_limit );
+            });
 
-			foreach ($tags as $position => $tag) {
-				if ($current_tag !== $tag->id) {
-						unset($tags[$position]);
-					}
-			}
+            $options = [
+                trans('tinyissue.none') => [
+                    'name'      => 'tag_resolution',
+                    'value'     => 0,
+                    'data-tags' => 0,
+                    'color'     => '#62CFFC',
+                ],
+            ];
 
-		} else {
-
-			$tags = $tags->filter(function (Model\Tag $tag) {
-				return !(\Auth::user()->role_id < $tag->role_limit );
-			});
-
-			$options = [
-				trans('tinyissue.none') => [
-					'name'      => 'tag_resolution',
-					'value'     => 0,
-					'data-tags' => 0,
-					'color'     => '#62CFFC',
-				],
-			];
-
-		}
+        }
 
         foreach ($tags as $tag) {
             $options[ucwords($tag->name)] = [
